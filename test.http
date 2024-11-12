@@ -1,0 +1,66 @@
+### Create new root node
+POST http://localhost:3000/v1/nodes
+X-API-Key: RAHASIA1234
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "1",
+  "type": "note",
+  "description": ""
+}
+
+### Create new child node
+POST http://localhost:3000/v1/nodes
+X-API-Key: RAHASIA1234
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "1.1",
+  "type": "note",
+  "description": "",
+  "ancestor_id": "fd0d7510-c2a2-434a-a459-4f9628d4c364"
+}
+
+### Get Root List
+GET http://localhost:3000/v1/nodes
+X-API-Key: RAHASIA1234
+Accept: application/json
+
+### Get Detail Node
+GET http://localhost:3000/v1/nodes/6a391d48-fcfd-437f-a3bc-16cd9cd07f94
+X-API-Key: RAHASIA1234
+Accept: application/json
+
+### Update Node
+PUT http://localhost:3000/v1/nodes/6a391d48-fcfd-437f-a3bc-16cd9cd07f94
+X-API-Key: RAHASIA1234
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "1",
+  "description": "One",
+  "type": "note"
+}
+
+### Delete Node With All Descendant
+DELETE http://localhost:3000/v1/nodes/2373a4eb-6782-424f-84ab-b07868c911af
+X-API-Key: RAHASIA1234
+Accept: application/json
+
+### Get Descendant List
+GET http://localhost:3000/v1/nodes/034772f7-2d81-4d6b-bfcd-c5db97834759/descendants
+X-API-Key: RAHASIA1234
+Accept: application/json
+
+### Move Node
+PUT http://localhost:3000/v1/nodes/fd0d7510-c2a2-434a-a459-4f9628d4c364/move
+X-API-Key: RAHASIA1234
+Accept: application/json
+Content-Type: application/json
+
+{
+  "to_ancestor_id": "7752c85a-4ce8-4ecd-b4c6-b4c8f556a79e"
+}

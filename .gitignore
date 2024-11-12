@@ -1,0 +1,81 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Go test binary
+*.test
+
+# Build directories
+build/
+bin/
+out/
+
+# Vendor directories for Go modules
+vendor/
+
+# Go workspace files
+*.code-workspace
+
+# IDE/editor specific files
+.vscode/
+.idea/
+
+# Log and debug files
+*.log
+*.trace
+
+# Go modules
+go.sum
+go.work
+go.work.sum
+
+# Test result cache files
+testdata/
+
+# Dependency directories (for example, dep vendors)
+_Gopkg.lock
+_Gopkg.toml
+
+# .env files with environment variables
+.env
+
+#Docker Assets
+/Assets
+
+# Ignore Docker files and configs
+#docker-compose.override.yml
+#docker-compose*.yml
+#docker-compose*.yaml
+
+# Ignore build artifacts from Docker
+Dockerfile.*
+docker-compose.override.*
+
+# Ignore Docker runtime files
+.docker/
+docker.sock
+
+# Ignore Dockerfile-generated images and containers
+*.tar
+*.pid
+*.bak
+
+# Ignore Docker cache and other temporary files
+**/cache/
+**/tmp/
+**/log/
+
+# Ignore Docker volumes and network data
+docker_data/
+volumes/
+
+#TEMP
+/temp
+/tmp
+

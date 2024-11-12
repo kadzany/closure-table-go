@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  closure_table_go_postgres_data: { }
+  closure_table_go_redis_data:
+    driver: local
+
+networks:
+  closure_table_go_network:
+    driver: bridge
+
+services:
+  closure_table_go_postgres:
+    container_name: closure_table_go_postgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=your_user
+      - POSTGRES_PASSWORD=your_password
+      - POSTGRES_DB=your_db
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    ports:
+      - '5436:5432'
+    networks:
+      - closure_table_go_network
+    volumes:
+      - ./Assets/docker/closure_table_go_postgres_data:/var/lib/postgresql/data
+  closure_table_go_redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    container_name: closure_table_go_redis
+    command: redis-server --save 20 1 --loglevel warning --requirepass yourRedisPass
+    volumes:
+      - closure_table_go_redis_data:/data

@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS node_closure;
+DROP TABLE IF EXISTS nodes;
+DROP EXTENSION IF EXISTS "uuid-ossp";
