@@ -1,15 +1,16 @@
 package service
 
 import (
-	"closure-table-go/model/domain"
-	"closure-table-go/model/dto"
-	"closure-table-go/pkg"
-	"closure-table-go/repository"
 	"database/sql"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-	"time"
+	"github.com/kadzany/closure-table-go/model/domain"
+	"github.com/kadzany/closure-table-go/model/dto"
+	"github.com/kadzany/closure-table-go/pkg"
+	"github.com/kadzany/closure-table-go/repository"
 )
 
 type NodeServiceImpl struct {

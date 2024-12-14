@@ -1,12 +1,13 @@
 package routes
 
 import (
-	"closure-table-go/controller"
-	"closure-table-go/repository"
-	"closure-table-go/service"
 	"database/sql"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/kadzany/closure-table-go/controller"
+	"github.com/kadzany/closure-table-go/repository"
+	"github.com/kadzany/closure-table-go/service"
 )
 
 func InitNodeRoutes(server *fiber.App, db *sql.DB, validate *validator.Validate) {

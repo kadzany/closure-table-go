@@ -1,9 +1,10 @@
 package repository
 
 import (
-	"closure-table-go/model/domain"
 	"database/sql"
+
 	"github.com/gofiber/fiber/v2"
+	"github.com/kadzany/closure-table-go/model/domain"
 )
 
 type NodeRepository interface {

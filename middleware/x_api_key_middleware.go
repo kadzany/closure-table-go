@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"closure-table-go/config"
-	"closure-table-go/model/dto"
-	"github.com/gofiber/fiber/v2"
+	"github.com/kadzany/closure-table-go/config"
+	"github.com/kadzany/closure-table-go/model/dto"
+	"github.com/kadzany/github.com/gofiber/fiber/v2"
 )
 
 func XApiKeyMiddleware(ctx *fiber.Ctx) error {

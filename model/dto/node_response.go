@@ -1,10 +1,11 @@
 package dto
 
 import (
-	"closure-table-go/model/domain"
-	"closure-table-go/pkg"
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/kadzany/closure-table-go/model/domain"
+	"github.com/kadzany/closure-table-go/pkg"
 )
 
 type NodeCreatedResponse struct {

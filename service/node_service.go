@@ -1,8 +1,8 @@
 package service
 
 import (
-	"closure-table-go/model/dto"
 	"github.com/gofiber/fiber/v2"
+	"github.com/kadzany/closure-table-go/model/dto"
 )
 
 type NodeService interface {

@@ -1,13 +1,14 @@
 package pkg
 
 import (
-	"closure-table-go/config"
 	"database/sql"
 	"fmt"
+	"time"
+
+	"github.com/kadzany/closure-table-go/config"
 	_ "github.com/lib/pq"
 	sqldblogger "github.com/simukti/sqldb-logger"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 func NewDB() *sql.DB {

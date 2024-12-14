@@ -1,14 +1,15 @@
 package main
 
 import (
-	"closure-table-go/config"
-	"closure-table-go/middleware"
-	"closure-table-go/pkg"
-	"closure-table-go/routes"
 	"fmt"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"time"
+	"github.com/kadzany/closure-table-go/config"
+	"github.com/kadzany/closure-table-go/middleware"
+	"github.com/kadzany/closure-table-go/pkg"
+	"github.com/kadzany/closure-table-go/routes"
 )
 
 func main() {

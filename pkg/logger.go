@@ -1,9 +1,10 @@
 package pkg
 
 import (
-	"closure-table-go/config"
-	"github.com/sirupsen/logrus"
 	"os"
+
+	"github.com/kadzany/closure-table-go/config"
+	"github.com/sirupsen/logrus"
 )
 
 func NewLogger() *logrus.Logger {
