@@ -1,9 +1,9 @@
 package repository
 
 import (
+	"context"
 	"database/sql"
 
-	"github.com/gofiber/fiber/v2"
 	"github.com/kadzany/closure-table-go/model/domain"
 	"github.com/kadzany/closure-table-go/pkg"
 	"github.com/lib/pq"
@@ -16,9 +16,9 @@ func NewNodeClosureRepository() NodeClosureRepository {
 	return &NodeClosureRepositoryImpl{}
 }
 
-func (repository *NodeClosureRepositoryImpl) Save(ctx *fiber.Ctx, tx *sql.Tx, nodeClosure domain.NodeClosure) domain.NodeClosure {
+func (repository *NodeClosureRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, nodeClosure domain.NodeClosure) domain.NodeClosure {
 	SQL := `INSERT INTO node_closure (ancestor, descendant, depth) VALUES ($1, $2, $3)`
-	_, err := tx.ExecContext(ctx.Context(), SQL,
+	_, err := tx.ExecContext(ctx, SQL,
 		nodeClosure.Ancestor,
 		nodeClosure.Descendant,
 		nodeClosure.Depth)
@@ -29,10 +29,10 @@ func (repository *NodeClosureRepositoryImpl) Save(ctx *fiber.Ctx, tx *sql.Tx, no
 	return nodeClosure
 }
 
-func (repository *NodeClosureRepositoryImpl) DeleteByDescendantIds(ctx *fiber.Ctx, tx *sql.Tx, descendantIds []string) error {
+func (repository *NodeClosureRepositoryImpl) DeleteByDescendantIds(ctx context.Context, tx *sql.Tx, descendantIds []string) error {
 	// Delete Node Closure By Descendant Ids
 	SQL := `DELETE FROM node_closure WHERE descendant = ANY($1)`
-	_, err := tx.ExecContext(ctx.Context(), SQL, pq.Array(descendantIds))
+	_, err := tx.ExecContext(ctx, SQL, pq.Array(descendantIds))
 
 	// Panic if error
 	pkg.PanicIfError(err)
@@ -40,9 +40,9 @@ func (repository *NodeClosureRepositoryImpl) DeleteByDescendantIds(ctx *fiber.Ct
 	return nil
 }
 
-func (repository *NodeClosureRepositoryImpl) FindDescendantIdsByAncestor(ctx *fiber.Ctx, tx *sql.Tx, ancestorId string) []string {
+func (repository *NodeClosureRepositoryImpl) FindDescendantIdsByAncestor(ctx context.Context, tx *sql.Tx, ancestorId string) []string {
 	SQL := `SELECT descendant FROM node_closure WHERE ancestor = $1`
-	rows, err := tx.QueryContext(ctx.Context(), SQL, ancestorId)
+	rows, err := tx.QueryContext(ctx, SQL, ancestorId)
 
 	// Panic if error
 	pkg.PanicIfError(err)
@@ -63,9 +63,9 @@ func (repository *NodeClosureRepositoryImpl) FindDescendantIdsByAncestor(ctx *fi
 	return descendantIds
 }
 
-func (repository *NodeClosureRepositoryImpl) FindByDescendant(ctx *fiber.Ctx, db *sql.DB, nodeID string) []domain.NodeClosure {
+func (repository *NodeClosureRepositoryImpl) FindByDescendant(ctx context.Context, db *sql.DB, nodeID string) []domain.NodeClosure {
 	SQL := `SELECT ancestor, descendant, depth FROM node_closure WHERE descendant = $1 ORDER BY depth`
-	rows, err := db.QueryContext(ctx.Context(), SQL, nodeID)
+	rows, err := db.QueryContext(ctx, SQL, nodeID)
 
 	// Panic if error
 	pkg.PanicIfError(err)
@@ -86,7 +86,7 @@ func (repository *NodeClosureRepositoryImpl) FindByDescendant(ctx *fiber.Ctx, db
 	return nodeClosures
 }
 
-func (repository *NodeClosureRepositoryImpl) GetNewClosures(ctx *fiber.Ctx, tx *sql.Tx, nodeId string, newAncestorId string) []domain.NodeClosure {
+func (repository *NodeClosureRepositoryImpl) GetNewClosures(ctx context.Context, tx *sql.Tx, nodeId string, newAncestorId string) []domain.NodeClosure {
 	SQL := `SELECT
 				super_tree.ancestor,
 				sub_tree.descendant,
@@ -97,7 +97,7 @@ func (repository *NodeClosureRepositoryImpl) GetNewClosures(ctx *fiber.Ctx, tx *
 				node_closure AS sub_tree ON sub_tree.ancestor = $1
 			WHERE
 				super_tree.descendant = $2`
-	rows, err := tx.QueryContext(ctx.Context(), SQL, nodeId, newAncestorId)
+	rows, err := tx.QueryContext(ctx, SQL, nodeId, newAncestorId)
 
 	// Panic if error
 	pkg.PanicIfError(err)
