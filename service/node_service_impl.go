@@ -194,7 +194,7 @@ func (service *NodeServiceImpl) DescendantList(ctx context.Context, nodeId strin
 	}
 
 	// Get Descendant Nodes
-	descendantNodes := service.NodeRepository.GetDescendantList(ctx, service.DB, nodeId)
+	descendantNodes, _ := service.NodeRepository.GetDescendantList(ctx, service.DB, nodeId)
 
 	// return response
 	return dto.ToNodePaginationResponse(descendantNodes), nil

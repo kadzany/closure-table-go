@@ -155,7 +155,7 @@ func (repository *NodeRepositoryImpl) GetNodeByID(ctx context.Context, db *sql.D
 	return node, nil
 }
 
-func (repository *NodeRepositoryImpl) GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) []domain.Node {
+func (repository *NodeRepositoryImpl) GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) ([]domain.Node, error) {
 	// Get Descendant List
 	SQL := `SELECT n.id, n.title, n.type, n.description, n.created_at, n.updated_at
 			FROM nodes n
@@ -166,7 +166,9 @@ func (repository *NodeRepositoryImpl) GetDescendantList(ctx context.Context, db 
 	rows, err := db.QueryContext(ctx, SQL, nodeId)
 
 	// Panic if error
-	pkg.PanicIfError(err)
+	if err != nil {
+		return nil, err
+	}
 
 	// Close rows
 	defer pkg.CloseRows(rows)
@@ -190,12 +192,14 @@ func (repository *NodeRepositoryImpl) GetDescendantList(ctx context.Context, db 
 		)
 
 		// Panic if error
-		pkg.PanicIfError(err)
+		if err != nil {
+			return nil, err
+		}
 
 		// Append node to nodes
 		nodes = append(nodes, node)
 	}
 
 	// Return nodes
-	return nodes
+	return nodes, nil
 }

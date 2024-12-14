@@ -14,5 +14,5 @@ type NodeRepository interface {
 	GetRootList(ctx context.Context, db *sql.DB) []domain.Node
 	CheckByID(ctx context.Context, db *sql.DB, id string) bool
 	GetNodeByID(ctx context.Context, db *sql.DB, id string) (domain.Node, error)
-	GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) []domain.Node
+	GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) ([]domain.Node, error)
 }
