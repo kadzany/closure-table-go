@@ -128,7 +128,7 @@ func (repository *NodeRepositoryImpl) CheckByID(ctx context.Context, db *sql.DB,
 	return rows.Next()
 }
 
-func (repository *NodeRepositoryImpl) DetailByID(ctx context.Context, db *sql.DB, id string) domain.Node {
+func (repository *NodeRepositoryImpl) GetNodeByID(ctx context.Context, db *sql.DB, id string) domain.Node {
 	// Get Node By ID
 	SQL := `SELECT id, title, type, description, created_at, updated_at FROM nodes WHERE id = $1`
 	row := db.QueryRowContext(ctx, SQL, id)
