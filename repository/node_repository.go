@@ -13,6 +13,6 @@ type NodeRepository interface {
 	DeleteByDescendantIds(ctx context.Context, tx *sql.Tx, descendantIds []string) error
 	GetRootList(ctx context.Context, db *sql.DB) []domain.Node
 	CheckByID(ctx context.Context, db *sql.DB, id string) bool
-	GetNodeByID(ctx context.Context, db *sql.DB, id string) domain.Node
+	GetNodeByID(ctx context.Context, db *sql.DB, id string) (domain.Node, error)
 	GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) []domain.Node
 }

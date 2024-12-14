@@ -128,7 +128,7 @@ func (repository *NodeRepositoryImpl) CheckByID(ctx context.Context, db *sql.DB,
 	return rows.Next()
 }
 
-func (repository *NodeRepositoryImpl) GetNodeByID(ctx context.Context, db *sql.DB, id string) domain.Node {
+func (repository *NodeRepositoryImpl) GetNodeByID(ctx context.Context, db *sql.DB, id string) (domain.Node, error) {
 	// Get Node By ID
 	SQL := `SELECT id, title, type, description, created_at, updated_at FROM nodes WHERE id = $1`
 	row := db.QueryRowContext(ctx, SQL, id)
@@ -148,11 +148,11 @@ func (repository *NodeRepositoryImpl) GetNodeByID(ctx context.Context, db *sql.D
 
 	// Return empty node if error
 	if err != nil {
-		return domain.Node{}
+		return domain.Node{}, err
 	}
 
 	// Return node
-	return node
+	return node, nil
 }
 
 func (repository *NodeRepositoryImpl) GetDescendantList(ctx context.Context, db *sql.DB, nodeId string) []domain.Node {

@@ -113,7 +113,7 @@ func (service *NodeServiceImpl) RootList(ctx context.Context) ([]dto.NodeRespons
 
 func (service *NodeServiceImpl) DetailNode(ctx context.Context, nodeId string) (dto.NodeResponse, error) {
 	// Get Node By ID
-	node := service.NodeRepository.DetailByID(ctx, service.DB, nodeId)
+	node, _ := service.NodeRepository.GetNodeByID(ctx, service.DB, nodeId)
 	if node.ID == uuid.Nil {
 		return dto.NodeResponse{}, fmt.Errorf("node not found")
 	}
@@ -124,7 +124,7 @@ func (service *NodeServiceImpl) DetailNode(ctx context.Context, nodeId string) (
 
 func (service *NodeServiceImpl) UpdateNode(ctx context.Context, nodeId string, request dto.NodeUpdateRequest) (dto.NodeResponse, error) {
 	// Get Detail Node By ID
-	node := service.NodeRepository.DetailByID(ctx, service.DB, nodeId)
+	node, _ := service.NodeRepository.GetNodeByID(ctx, service.DB, nodeId)
 	if node.ID == uuid.Nil {
 		return dto.NodeResponse{}, fmt.Errorf("node not found")
 	}
